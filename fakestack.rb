@@ -66,7 +66,8 @@ while($disconnected == false) do
 	 	puts "Got a SYNACK with seq = #{seq = packet.tcp_seq} from #{packet.ip_saddr}"
 		ack_packet = PacketFu::TCPPacket.new(:config => $config)
        	ack_packet.ip_daddr = packet.ip_saddr
-       	ack_packet.tcp_src = $portack_packet.tcp_dst = packet.tcp_src
+       	ack_packet.tcp_src = $port
+	ack_packet.tcp_dst = packet.tcp_src
        	ack_packet.tcp_ack = seq + 1
        	ack_packet.tcp_seq = packet.tcp_ack
        	ack_packet.tcp_flags.ack = 1
