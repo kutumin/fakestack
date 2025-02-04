@@ -80,7 +80,8 @@ while($disconnected == false) do
    		if packet.tcp_flags.psh == 1
    			puts "Got a PSH/ACK with seq = #{seq = packet.tcp_seq}, probably the GET..."
    			puts packet.payload.inspect
-   			ack_packet = PacketFu::TCPPacket.new(:config => $config) ack_packet.ip_daddr = packet.ip_saddr
+   			ack_packet = PacketFu::TCPPacket.new(:config => $config) 
+                        ack_packet.ip_daddr = packet.ip_saddr
    			ack_packet.tcp_src = $port
    			ack_packet.tcp_dst = packet.tcp_src
    			ack_packet.tcp_ack = seq + packet.payload.size
@@ -118,6 +119,8 @@ while($disconnected == false) do
    		rst_packet.to_w($iface)
    	else # Got a RST, thanks!
    		$disconnected = true
-   	end
-   end
+end
+end
+end
+end
 end
